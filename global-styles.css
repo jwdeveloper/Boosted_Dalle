@@ -1,0 +1,44 @@
+.img-thumbnail:hover
+{
+    cursor:pointer
+}
+.card-header:hover
+{
+    cursor:pointer
+}
+
+.favorite
+{
+    margin-bottom: 2em;
+}
+
+.app
+{
+    padding: 2em;
+}
+
+.batch
+{
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.right
+{
+    margin-left: auto; 
+    margin-right: 0;
+}
+
+.dalle-form
+{
+    margin-bottom: 2em;
+}
+.form
+{
+    padding: 1em;
+}
+
+.dalle-form-btn-fill
+{
+    width: 100%;
+}

@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-sm-4 jumbotron"/>
+    <div class="col-sm-4 ">
+        <div class="card favorite form-main">
+                <div class="form-group form-test">
+                    <label lass="form-label">Input text</label>
+                    <InputText class="form-control" id="Input" v-model="fromData.input" />
+                </div>
+                <div class="form-group form-test">
+                    <label class="form-label">Images to render {{fromData.input}} </label>
+                    <input type="range"   class="form-range" min="1" max="10" v-model="fromData.input">
+                </div>
+                <div class="form-group form-test">
+                    <button class="btn btn-secondary btn-lg btn-fill"  v-on:click = "removeImage(image)">Generate</button>
+                </div>
+    </div>
+    <div class="col-sm-4 jumbotron"/>
+</div>
