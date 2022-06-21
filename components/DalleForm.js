@@ -13,9 +13,10 @@ Vue.component('Dalleform', {
             }
             this.batches.push(bath);
 
+            bath.images.push()
             for(var i =0;i<this.data.imagesCount;i++)
             {
-                SendDalleGenerateRequest(bath)
+                sendRequestRandomDelay(bath)
             }
         },
     },

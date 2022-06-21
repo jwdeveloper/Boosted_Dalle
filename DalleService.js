@@ -2,6 +2,7 @@ function SendDalleGenerateRequest(batch) {
     let payload = { prompt: batch.input };
     var headers =
     {
+        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json',
         'Accept': '*/*',
         'Accept-Encoding': 'gzip, deflate, br',
@@ -24,23 +25,54 @@ function SendDalleGenerateRequest(batch) {
         headers: headers,
         body: JSON.stringify(payload)
     })
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) 
+            {
+                return response.json();
+            }
+            if(response.status === 429)
+            {
+                throw new Error('TRAFFIC');
+            }
+
+            throw new Error('Uknow error try again');
+        })
         .then(data => handleResponse(batch, data))
         .catch((error) => {
-            console.log(error);
+             if(error.message === "TRAFFIC")
+             {
+                sendRequestRandomDelay(batch);
+                return;
+             }
+           
             batch.error = error;
-            batch.isDone  =true;
+            batch.imagesCount = batch.imagesCount-1;
         });
 };
 
 
+function sendRequestRandomDelay(batch)
+{
+    setTimeout(function(){
+        console.log("Trying to send request again");
+        SendDalleGenerateRequest(batch);
+    }, getRandomInt(100,3000));
+}
+
 function handleResponse(batch, data) {
     console.log('Success:', data);
     batch.currentCount += 1;
-    if (batch.currentCount === imagesCount) {
+    if (batch.currentCount === batch.imagesCount) {
         batch.isDone = true;
     }
     for (const image in data.images) {
-        batch.image.push(image)
+        batch.images.push(data.images[image])
     }
 }
+
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
