@@ -59,10 +59,13 @@ function sendRequestRandomDelay(batch)
     }, getRandomInt(100,3000));
 }
 
+
+
+
 function handleResponse(batch, data) {
     console.log('Success:', data);
     batch.currentCount += 1;
-    if (batch.currentCount === batch.imagesCount) {
+    if (batch.currentCount >= batch.imagesCount) {
         batch.isDone = true;
     }
     for (const image in data.images) {

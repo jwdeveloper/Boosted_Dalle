@@ -8,13 +8,14 @@ Vue.component('Batch', {
             if (this.favorite.images.indexOf(base64) != -1)
                 return;
             this.favorite.images.push(base64);
+            window.localStorage.setItem("Images",JSON.stringify(this.favorite.images) );
         },
         getImageLink(base64) {
             return "data:image/png;base64," + base64;
         }, 
-        removeBatch(batch)
+        removeBatch()
         {
-            this.batches.splice(this.batches.indexOf(batch), 1);
+            this.batches.splice(this.batches.indexOf(this.batch), 1);
         }
     },
     data: function () {
@@ -36,7 +37,7 @@ Vue.component('Batch', {
           </div>
 
           <div class="col-sm-1">
-          <h5 class="modal-title float-right">{{batch.currentCount}}/{{batch.imagesCount}}</h5>
+          <h5 class="modal-title float-right">{{batch.currentCount* 9}}/{{batch.imagesCount* 9}}</h5>
         </div>
 
           <div class="col-sm-1">
@@ -44,7 +45,7 @@ Vue.component('Batch', {
            </div>
         
           <div class="col-sm-1 ">
-            <button class="btn btn-danger float-right" v-on:click ="removeBatch(this)">X</button>
+            <button class="btn btn-danger float-right" v-on:click ="removeBatch()">X</button>
           </div>
           
         </div>

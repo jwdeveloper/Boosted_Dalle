@@ -14,32 +14,28 @@ Vue.component('Dalleform', {
             this.batches.push(bath);
 
             bath.images.push()
-            for(var i =0;i<this.data.imagesCount;i++)
-            {
+            for (var i = 0; i < this.data.imagesCount; i++) {
                 sendRequestRandomDelay(bath)
             }
         },
     },
     template: `
-    <div class="row dalle-form">
-       <div class="col-sm-3 "/>
-       <div class="col-sm-6 ">
-            <div class="card favorite form">
+  
+            <div class="card favorite form dalle-form">
                <div class="form-group form-test">
-                    <label lass="form-label">Input text</label>
+                    <label>Input text</label>
                     <input class="form-control"  v-model="data.input"/>
                 </div>
                 <div class="form-group form-test">
-                    <label class="form-label">Images to render {{data.imagesCount}} </label>
+                    <label >Images to render {{data.imagesCount * 9}} </label>
                     <input type="range"    class="form-range" min="1" max="10" v-model="data.imagesCount">
                 </div>
                 <div class="form-group form-test">
-                    <button class="btn btn-secondary btn-lg dalle-form-btn-fill"  v-on:click = "addBatch()">Generate</button>
+                    <button class="btn btn-primary btn-lg dalle-form-btn-fill"  v-on:click = "addBatch()">Generate</button>
                 </div>
              </div>
              </div>
-        <div class="col-sm-3"/>
-    </div>`})
+   `})
 
 
 

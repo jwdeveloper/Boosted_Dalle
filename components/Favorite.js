@@ -7,7 +7,7 @@ Vue.component('Favorite', {
         removeImage(base64)
         {
             this.favorite.images.splice(this.favorite.images.indexOf(base64), 1);
-            console.log( this.favorite.images);
+            window.localStorage.setItem("Images",JSON.stringify(this.favorite.images) );
         }
     },
     data: function () {
@@ -20,7 +20,7 @@ Vue.component('Favorite', {
     <div class="card-body">
         <div class="row">
             <div class="col-sm-6 ">
-                <h5 class="card-title">Favorite images </h5>
+                <h5 class="card-title ">Favorite images </h5>
             </div>
             
             <div class="col-sm-6 ">
@@ -29,11 +29,11 @@ Vue.component('Favorite', {
             </div>
         </div>
 
-        <div class="card-body" >
+        <div class="card-body " >
         <img  v-for="image in favorite.images" :width = "imageSize"
              :src="getImageLink(image)"
              v-on:click = "removeImage(image)"
-             class="img-thumbnail"
+             class="img-thumbnail rounded"
              >    
        </div>
     </div>
